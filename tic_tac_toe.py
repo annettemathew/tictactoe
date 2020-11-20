@@ -22,7 +22,23 @@ def print_board(board):
 def rules_function(board, choices, usymbol, csymbol): #board parameter for when it is intelligent
     # Step 1: in most cases, generate random ordered pair, but in certain cases, return intelligent response to prevent
     # user win
-    if(board[0][0] == usymbol): #top row
+
+    if(board[0][1] == csymbol):
+        if(board[1][1] == csymbol):
+            if(board[2][1] == " "):
+                print("Computer should choose (2, 1)")
+                board[2][1] = csymbol
+                exit_game = True
+                return choices[7]
+    if(board[0][2] == csymbol):
+        if(board[1][1] == csymbol):
+            if(board[2][0] == ' '):
+                print("Computer should choose (2, 0)")
+                board[2][0] = csymbol
+                print("Game over.")
+                exit_game = True
+                return choices[6]
+    elif(board[0][0] == usymbol): #top row
         if(board[0][1] == usymbol):
             if(board[0][2] == usymbol):
                 print("Game over.")
@@ -139,8 +155,9 @@ print_board(board)
 # exit_game = False
 while(exit_game == False):
     print_board(board)
+    print("Exit_game: ", exit_game)
     row_num = int(input("Enter row number(0, 1, 2): "))
-    if(row_num != 0 and row_num != 1 and row_num != 2):
+    if(row_num != 0 and row_num != 1 and row_num != 2): # check range
         print("Error: That is not one of the given choices. ", row_num)
         error = True
         exit_game = True
@@ -149,6 +166,9 @@ while(exit_game == False):
         print("Error: That is not one of the given choices. ", col_num)
         error = True
         exit_game = True
+    if(board[row_num][col_num] != " "):
+        print("Error: This cell is taken.")
+        continue
     board[row_num][col_num] = user_symbol
     print_board(board)
     #call generate_comp_response which will return a random pair from the list of empty spots
