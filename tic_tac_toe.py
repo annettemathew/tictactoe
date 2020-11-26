@@ -6,6 +6,9 @@
 from array import *
 from random import randint
 from enum import Enum
+from inspect import currentframe, getframeinfo
+
+
 
 class Orientation(Enum):
     TOP = 0
@@ -42,21 +45,6 @@ def print_board(board):
 #            print(board[i][j], end =" ")
     print("------------")
 
-def generate_comp_response(board, comp_symbol):
-    print("Generating response...")
-    # Step 1: call empty_cells & it returns list of lists. size of list will be used to generate random number
-    # based on total # of remaining empty spaces
-    possible_choices = empty_cells(board)
-    print(possible_choices)
-    # Step 2: use rules_function to generate 1 random number which is used to index into the list and generate which row and col
-    # will be picked by the computer
-    x_y_pair = rules_function(board, possible_choices, user_symbol, comp_symbol)
-    print(x_y_pair)
-    if(x_y_pair == {}):
-        exit(0)
-    # Step 3: update the chosen empty space with the computer symbol
-    board[x_y_pair[0]][x_y_pair[1]] = comp_symbol
-# returns list of <row, col> pairs that identify which cells are empty
 def empty_cells(board):
     print("empty_cells()")
     list = {}
@@ -161,6 +149,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][1] = comp_symbol
                 avail_indices.remove(conv(1, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[1][0] == comp_symbol and b[1][2] == comp_symbol and b[1][1] == " "):
@@ -170,6 +160,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(1, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.BOTTOM):
@@ -179,6 +171,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][2] = comp_symbol
                 avail_indices.remove(conv(2, 2))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[2][0] == comp_symbol and b[2][1] == comp_symbol and b[2][2] == " "):
@@ -188,6 +182,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 2))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[2][1] == user_symbol and b[2][2] == user_symbol and b[2][0] == " "):
@@ -195,6 +191,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][0] = comp_symbol
                 avail_indices.remove(conv(2, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[2][1] == comp_symbol and b[2][2] == comp_symbol and b[2][0] == " "):
@@ -204,6 +202,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 0))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[2][0] == user_symbol and b[2][2] == user_symbol and b[2][1] == " "):
@@ -211,6 +211,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][1] = comp_symbol
                 avail_indices.remove(conv(2, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[2][0] == comp_symbol and b[2][2] == comp_symbol and b[2][1] == " "):
@@ -220,6 +222,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.LEFT):
@@ -229,6 +233,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][0] = comp_symbol
                 avail_indices.remove(conv(2, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][0] == comp_symbol and b[1][0] == comp_symbol and b[2][0] == " "):
@@ -238,6 +244,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 0))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[0][0] == user_symbol and b[2][0] == user_symbol and b[1][0] == " "):
@@ -245,6 +253,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][0] = comp_symbol
                 avail_indices.remove(conv(1, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][0] == comp_symbol and b[2][0] == comp_symbol and b[1][0] == " "):
@@ -253,6 +263,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][0] = comp_symbol
                 avail_indices.remove(conv(1, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 print_board(b)
                 exit(0)
@@ -261,6 +273,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[0][0] = comp_symbol
                 avail_indices.remove(conv(0, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[1][0] == comp_symbol and b[2][0] == comp_symbol and b[0][0] == " "):
@@ -270,6 +284,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(0, 0))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.CENTER):
@@ -281,6 +297,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][1] = comp_symbol
                 avail_indices.remove(conv(2, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][1] == comp_symbol and b[1][1] == comp_symbol and b[2][1] == " "):
@@ -291,6 +309,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[0][1] == user_symbol and b[2][1] == user_symbol and b[1][1] == " "):
@@ -298,6 +318,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][1] = comp_symbol
                 avail_indices.remove(conv(1, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][1] == comp_symbol and b[2][1] == comp_symbol and b[1][1] == " "):
@@ -307,6 +329,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(1, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[1][1] == user_symbol and b[2][1] == user_symbol and b[0][1] == " "):
@@ -314,6 +338,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[0][1] = comp_symbol
                 avail_indices.remove(conv(0, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[1][1] == comp_symbol and b[2][1] == comp_symbol and b[0][1] == " "):
@@ -323,6 +349,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(0, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.RIGHT):
@@ -340,6 +368,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 2))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[0][2] == user_symbol and b[2][2] == user_symbol and b[1][2] == " "):
@@ -347,6 +377,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][2] = comp_symbol
                 avail_indices.remove(conv(1, 2))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][2] == comp_symbol and b[2][2] == comp_symbol and b[1][2] == " "):
@@ -357,6 +389,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(1, 2))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[1][2] == user_symbol and b[2][2] == user_symbol and b[0][2] == " "):
@@ -365,6 +399,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[0][2] = comp_symbol
                 avail_indices.remove(conv(0, 2))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[1][2] == comp_symbol and b[2][2] == comp_symbol and b[0][2] == " "):
@@ -374,6 +410,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(0, 2))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.DIAG1):
@@ -385,6 +423,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][2] = comp_symbol
                 avail_indices.remove(conv(2, 2))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][0] == comp_symbol and b[1][1] == comp_symbol and b[2][2] == " "):
@@ -395,6 +435,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 2))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[0][0] == user_symbol and b[2][2] == user_symbol and b[1][1] == " "):
@@ -402,6 +444,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][1] = comp_symbol
                 avail_indices.remove(conv(1, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][0] == comp_symbol and b[2][2] == comp_symbol and b[1][1] == " "):
@@ -411,6 +455,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(1, 1))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[1][1] == user_symbol and b[2][2] == user_symbol and b[0][0] == " "):
@@ -418,6 +464,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[0][0] = comp_symbol
                 avail_indices.remove(conv(0, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[1][1] == comp_symbol and b[2][2] == comp_symbol and b[0][0] == " "):
@@ -427,6 +475,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(0, 0))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
     elif(orientation == Orientation.DIAG2):
@@ -436,6 +486,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[2][0] = comp_symbol
                 avail_indices.remove(conv(2, 0))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][2] == comp_symbol and b[1][1] == comp_symbol and b[2][0] == " "):
@@ -445,6 +497,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(2, 0))
                 print_board(b)
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 exit(0)
         elif (b[0][2] == user_symbol and b[2][0] == user_symbol and b[1][1] == " "):
@@ -452,6 +506,8 @@ def process_tuple(b, orientation, turn, #next_turn
                 b[1][1] = comp_symbol
                 avail_indices.remove(conv(1, 1))
                 turn = Turn.USER
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
                 print(turn)
                 return
         elif (b[0][2] == comp_symbol and b[2][0] == comp_symbol and b[1][1] == " "):
@@ -461,14 +517,18 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(1, 1))
                 print_board(b)
                 turn = Turn.USER
-                print(turn)
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
+                print("User turn: ", turn)
                 exit(0)
         elif (b[1][1] == user_symbol and b[2][0] == user_symbol and b[0][2] == " "):
             if (turn == Turn.COMP):
                 b[0][2] = comp_symbol
                 avail_indices.remove(conv(0, 2))
                 turn = Turn.USER
-                print(turn)
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
+                print("User turn: ", turn)
                 return
         elif (b[1][1] == comp_symbol and b[2][0] == comp_symbol and b[0][2] == " "):
             # take (0, 2) and win
@@ -477,7 +537,9 @@ def process_tuple(b, orientation, turn, #next_turn
                 avail_indices.remove(conv(0, 2))
                 print_board(b)
                 turn = Turn.USER
-                print(turn)
+                frameinfo = getframeinfo(currentframe())
+                print(frameinfo.filename, frameinfo.lineno)
+                print("User turn: ", turn)
                 exit(0)
     else:
         print("Error: incorrect orientation")
@@ -502,6 +564,7 @@ def detect_win(board, symbol):
     elif (board[2][0] == symbol and board[2][1] == symbol and board[2][2] == symbol):
         print_board(board)
         print(msg)
+        exit_game = True
         exit(0)
     elif (board[0][0] == symbol and board[1][0] == symbol and board[2][0] == symbol):
         print_board(board)
@@ -534,7 +597,7 @@ def rules_function(board, turn, #choices,
     detect_win(board, comp_symbol)
 
     print(avail_indices)
-    print(turn)
+    print("Turn: ", turn)
 
     # Step 2a: process top row
     process_tuple(board, Orientation.TOP, turn, avail_indices)
@@ -551,10 +614,15 @@ def rules_function(board, turn, #choices,
         rand_int = randint(0, len(avail_indices) - 1)
         r = (int)(avail_indices[rand_int] / 3)
         c = avail_indices[rand_int] % 3
+        frameinfo = getframeinfo(currentframe())
+        print(frameinfo.filename, frameinfo.lineno)
         print("Indexing into: ", rand_int,  ", avail_index: ", avail_indices[rand_int], ", row: ", r, ", col: " , c)
         board[r][c] = comp_symbol
-        avail_indices.remove(rand_int)
         turn = Turn.USER
+        print("R: ", r, ", C: ", c, ", avail_indices: ", avail_indices)
+        print("Rand_int: ", row_num * 3 + col_num)
+        del avail_indices[rand_int]
+        print("R: ", r, ", C: ", c, ", avail_indices: ", avail_indices)
 
     # Step 2: in most cases, generate random ordered pair, but in certain cases, return intelligent response to prevent
     # user win
@@ -576,6 +644,7 @@ print_board(board)
 while(exit_game == False):
     print_board(board)
     print("Exit_game: ", exit_game)
+    next_turn = Turn.USER
     row_num = int(input("Enter row number(0, 1, 2): "))
     if(row_num != 0 and row_num != 1 and row_num != 2): # check range
         print("Error: That is not one of the given choices. ", row_num)
@@ -588,14 +657,23 @@ while(exit_game == False):
         error = True
         exit_game = True
         exit(-1) # error exit
-    avail_indices.remove(row_num * 3 + col_num)
+    print("R: ", row_num, ", C: ", col_num, ", avail_indices: ", avail_indices)
+    del avail_indices[row_num * 3 + col_num]
+#    avail_indices.remove(row_num * 3 + col_num)
+    frameinfo = getframeinfo(currentframe())
+    print(frameinfo.filename, frameinfo.lineno)
+    print("Rand_int: ", row_num * 3 + col_num)
+    print("R: ", row_num, ", C: ", col_num, ", avail_indices: ", avail_indices)
     if(board[row_num][col_num] != " "):
         print("Error: This cell is taken.")
         continue
     board[row_num][col_num] = user_symbol
+    print("Next_turn: ", next_turn)
     next_turn = Turn.COMP
+    print("Next_turn is now: ", next_turn)
     print_board(board)
     #call generate_comp_response which will return a random pair from the list of empty spots
     # generate_comp_response(board, comp_symbol)
-    rules_function(board, next_turn, user_symbol, comp_symbol)
+    if(next_turn == Turn.COMP):
+        rules_function(board, next_turn, user_symbol, comp_symbol)
 print("Outside while loop")
